@@ -27,3 +27,7 @@ tramp
 
 # AUCTeX auto folder
 /auto/
+
+# PDF
+
+*.pdf
