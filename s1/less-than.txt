@@ -1,0 +1,12 @@
+Syntax:
+  e1 < e2
+  where < is a keyword and
+  e1, e2 are subexpressions
+
+Type-Checking
+  e1 and e2 have to be int type
+  the type of the expression is bool
+
+Evaluation rules:
+  if e1 is less than e2 result of whole expression is true
+  otherwise (e2 is less than e1) result is false
