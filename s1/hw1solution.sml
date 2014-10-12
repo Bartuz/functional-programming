@@ -20,12 +20,19 @@ fun number_in_month( dates : (int*int*int) list, expected_month : int) =
 	    if null dates 
 	    then 0
 	    else
-		if null (tl dates)
-		then 
-		    let val month = #2 (hd dates)
-		    in if month = expected_month then 1 else 0
-		    end
-		else count(hd dates :: []) + count(tl dates)
+		let val month = #2 (hd dates)
+		in if month = expected_month then 1 else 0 + count(tl dates)
+		end
     in
 	count(dates)
     end
+
+fun number_in_months( dates : (int * int * int) list, expected_months:  int list) =
+    let fun count_for_each( expected_months : int list) =
+	    if null expected_months 
+	    then 0
+	    else number_in_month(dates, hd expected_months) + count_for_each(tl expected_months)
+    in
+	count_for_each(expected_months)
+    end
+
