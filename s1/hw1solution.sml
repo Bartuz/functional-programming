@@ -75,4 +75,17 @@ fun date_to_string(date : int * int * int) =
     in
 	month ^ " " ^ day ^ ", " ^ year
     end
-	
+
+
+fun number_before_reaching_sum(sum : int, numbers : int list) = 
+    let
+	fun search_index(sum : int, numbers : int list, index : int) =
+	    let val number = hd numbers
+	    in
+		if sum - number > 0
+		then search_index(sum - number, tl numbers, index + 1)
+		else index
+	    end
+    in
+	search_index(sum, numbers, 0)
+    end

@@ -511,3 +511,90 @@ val it = () : unit
 -val test5 = dates_in_months([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = [(2012,2,28),(2011,3,31),(2011,4,28)];
 val test5 = true : bool
 - 
+
+Process sml finished
+Standard ML of New Jersey v110.77 [built: Sat Oct 11 21:10:02 2014]
+- use "hw1solution.sml";
+[opening hw1solution.sml]
+val is_date_in_month = fn : (int * int * int) * int -> bool
+val is_older = fn : (int * int * int) * (int * int * int) -> bool
+val number_in_month = fn : (int * int * int) list * int -> int
+val number_in_months = fn : (int * int * int) list * int list -> int
+val dates_in_month = fn
+  : (int * int * int) list * int -> (int * int * int) list
+val dates_in_months = fn
+  : (int * int * int) list * int list -> (int * int * int) list
+val get_nth = fn : string list * int -> string
+val it = () : unit
+- val test6 = get_nth(["hi", "there", "how", "are", "you"], 2) = "there";
+val test6 = true : bool
+-     tl datesstdIn:3.8-3.13 Error: unbound variable or constructor: dates
+- 
+
+Process sml finished
+Standard ML of New Jersey v110.77 [built: Sat Oct 11 21:10:02 2014]
+- use "hw1solution.sml";
+[opening hw1solution.sml]
+hw1solution.sml:76.2-76.33 Error: operator and operand don't agree [tycon mismatch]
+  operator domain: string * string
+  operand:         string * int
+  in expression:
+    month ^ " " ^ day
+hw1solution.sml:76.2-76.33 Error: operator and operand don't agree [tycon mismatch]
+  operator domain: string * string
+  operand:         string * int
+  in expression:
+    month ^ " " ^ day ^ ", " ^ year
+
+uncaught exception Error
+  raised at: ../compiler/TopLevel/interact/evalloop.sml:66.19-66.27
+             ../compiler/TopLevel/interact/evalloop.sml:44.55
+             ../compiler/TopLevel/interact/evalloop.sml:296.17-296.20
+- 
+
+Process sml finished
+Standard ML of New Jersey v110.77 [built: Sat Oct 11 21:10:02 2014]
+- use "hw1solution.sml";
+[opening hw1solution.sml]
+[autoloading]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[autoloading done]
+hw1solution.sml:72.22-72.32 Error: unbound variable or constructor: month_strs
+hw1solution.sml:74.13-74.25 Error: unbound variable or constructor: ToString in path Int.ToString
+
+uncaught exception Error
+  raised at: ../compiler/TopLevel/interact/evalloop.sml:66.19-66.27
+             ../compiler/TopLevel/interact/evalloop.sml:44.55
+             ../compiler/TopLevel/interact/evalloop.sml:296.17-296.20
+- use "hw1solution.sml";
+[opening hw1solution.sml]
+hw1solution.sml:74.13-74.25 Error: unbound variable or constructor: ToString in path Int.ToString
+val test7 = date_to_string((2013, 6, 1)) = "June 1, 2013"
+uncaught exception Error
+  raised at: ../compiler/TopLevel/interact/evalloop.sml:66.19-66.27
+             ../compiler/TopLevel/interact/evalloop.sml:44.55
+             ../compiler/TopLevel/interact/evalloop.sml:296.17-296.20
+- use "hw1solution.sml"; 
+- use "hw1solution.sml";
+[opening hw1solution.sml]
+val is_date_in_month = fn : (int * int * int) * int -> bool
+val is_older = fn : (int * int * int) * (int * int * int) -> bool
+val number_in_month = fn : (int * int * int) list * int -> int
+val number_in_months = fn : (int * int * int) list * int list -> int
+val dates_in_month = fn
+  : (int * int * int) list * int -> (int * int * int) list
+val dates_in_months = fn
+  : (int * int * int) list * int list -> (int * int * int) list
+val get_nth = fn : string list * int -> string
+val date_to_string = fn : int * int * int -> string
+val it = () : unit
+- 
+- val test7 = date_to_string((2013, 6, 1)) = "June 1, 2013"
+= ;
+val test7 = true : bool
+- val is_date_in_month = fn : (int * int * int) * int -> boolstdIn:6.27-6.30 Error: syntax error: deleting  COLON LPAREN
+stdIn:6.45-6.48 Error: syntax error: deleting  RPAREN ASTERISK
+stdIn:6.53 Error: syntax error found at ARROW
+- 
+
+Process sml finished
