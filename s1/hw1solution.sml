@@ -66,3 +66,13 @@ fun get_nth(strs : string list, index : int) =
     then hd strs
     else get_nth(tl strs, index - 1)
 	
+fun date_to_string(date : int * int * int) =
+    let 
+	val months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+	val month = get_nth(months, #2 date)
+	val day = Int.toString(#3 date)
+	val year = Int.toString(#1 date)
+    in
+	month ^ " " ^ day ^ ", " ^ year
+    end
+	
