@@ -56,7 +56,13 @@ fun dates_in_months(dates : (int * int * int) list, expected_months: int list) =
     let fun collect_dates_for_each(expected_months: int list) =
 	    if null expected_months
 	    then []
-	    else dates_in_month(dates, hd expected_months) :: collect_dates_for_each(tl expected_months)
+	    else dates_in_month(dates, hd expected_months) @ collect_dates_for_each(tl expected_months)
     in
 	collect_dates_for_each(expected_months)
     end
+
+fun get_nth(strs : string list, index : int) =
+    if index = 1 
+    then hd strs
+    else get_nth(tl strs, index - 1)
+	
