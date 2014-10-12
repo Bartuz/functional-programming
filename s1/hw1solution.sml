@@ -15,3 +15,17 @@ fun is_older( date1 : int*int*int, date2: int*int*int) =
 	else d1 < d2
     end
 
+fun number_in_month( dates : (int*int*int) list, expected_month : int) =
+    let fun count(dates : (int*int*int) list) =
+	    if null dates 
+	    then 0
+	    else
+		if null (tl dates)
+		then 
+		    let val month = #2 (hd dates)
+		    in if month = expected_month then 1 else 0
+		    end
+		else count(hd dates :: []) + count(tl dates)
+    in
+	count(dates)
+    end
