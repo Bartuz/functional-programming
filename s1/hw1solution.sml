@@ -94,3 +94,12 @@ fun what_month(day : int) =
     let val days_in_months = [31,28,31,30,31,30,31,31,30,31,30,31]
     in number_before_reaching_sum(day, days_in_months) + 1
     end
+
+
+fun month_range(day1 : int, day2 : int) = 
+    if day1 > day2
+    then [0]
+    else if day1 = day2
+    then what_month(day1) :: []
+    else what_month(day1) :: month_range(day1 + 1, day2)
+	  
