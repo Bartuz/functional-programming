@@ -102,4 +102,21 @@ fun month_range(day1 : int, day2 : int) =
     else if day1 = day2
     then what_month(day1) :: []
     else what_month(day1) :: month_range(day1 + 1, day2)
-	  
+
+
+fun oldest(dates : (int * int * int) list) =
+    if null dates
+    then NONE
+    else
+	let fun oldest_nonempty(dates : (int * int * int) list)=
+		if null (tl dates)
+		then hd dates
+		else let val tl_oldest = oldest_nonempty(tl dates)
+		     in
+			 if is_older(hd dates, tl_oldest)
+			 then hd dates
+			 else tl_oldest
+		     end
+	in
+	    SOME (oldest_nonempty dates)
+	end
