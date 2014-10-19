@@ -21,13 +21,10 @@ exception IllegalMove
 
 (* put your solutions for problem 2 here *)
 
-fun all_except_option(str : string, lst : string list) =
-  case lst of
-    []        => NONE
-    | x::xs'  => 
-      if same_string(str,x) 
-      then SOME xs'
-      else case all_except_option(str, xs') of
-          NONE      => NONE
-          | SOME y  => SOME(x::y)
-
+fun all_except_option(_, []) = NONE
+  | all_except_option(str, x::xs') =
+    if same_string(str,x) 
+    then SOME xs'
+    else case all_except_option(str, xs') of
+        NONE      => NONE
+        | SOME y  => SOME(x::y)
