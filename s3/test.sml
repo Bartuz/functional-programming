@@ -5,6 +5,10 @@
 
 val test1 = all_except_option("string", ["string"]) = SOME []
 
+val test1_2 = all_except_option("string", ["string", "a"]) = SOME ["a"]
+val test1_3 = all_except_option("string", ["string", "a", "b"]) = SOME ["a", "b"]
+val test1_4 = all_except_option("string", ["c", "string", "a", "b"]) = SOME ["c", "a", "b"]
+
 val test2 = get_substitutions1([["foo"],["there"]], "foo") = []
 
 val test3 = get_substitutions2([["foo"],["there"]], "foo") = []
