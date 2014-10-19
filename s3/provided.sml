@@ -23,10 +23,11 @@ exception IllegalMove
 
 fun all_except_option(str : string, lst : string list) =
   case lst of
-      []      => NONE
+    []        => NONE
     | x::xs'  => 
       if same_string(str,x) 
       then SOME xs'
       else case all_except_option(str, xs') of
-          NONE    => NONE
-        | SOME y  => SOME(x::y)
+          NONE      => NONE
+          | SOME y  => SOME(x::y)
+
