@@ -3,13 +3,15 @@
 (* To run the test, add a new line to the top of this file: use "homeworkname.sml"; *)
 (* All the tests should evaluate to true. For example, the REPL should say: val test1 = true : bool *)
 
-val test1 = all_except_option("string", ["string"]) = SOME []
+val test1   = all_except_option("string", ["string"]) = SOME []
 
 val test1_2 = all_except_option("string", ["string", "a"]) = SOME ["a"]
 val test1_3 = all_except_option("string", ["string", "a", "b"]) = SOME ["a", "b"]
 val test1_4 = all_except_option("string", ["c", "string", "a", "b"]) = SOME ["c", "a", "b"]
 
-val test2 = get_substitutions1([["foo"],["there"]], "foo") = []
+val test2   = get_substitutions1([["foo"],["there"]], "foo") = []
+val test2_1 = get_substitutions1([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jeff","Jeffrey"]], "Jeff") = ["Jeffrey","Geoff","Jeffrey"]
+val test2_2  = get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], "Fred") = ["Fredrick","Freddie","F"]
 
 val test3 = get_substitutions2([["foo"],["there"]], "foo") = []
 

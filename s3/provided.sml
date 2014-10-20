@@ -28,3 +28,10 @@ fun all_except_option(_, []) = NONE
     else case all_except_option(str, xs') of
         NONE      => NONE
         | SOME y  => SOME(x::y)
+
+fun get_substitutions1([], _) = []
+  | get_substitutions1(x::xs', s) =
+    case all_except_option(s, x) of
+      NONE      => get_substitutions1(xs', s)
+      | SOME y  => y @ get_substitutions1(xs', s)
+
