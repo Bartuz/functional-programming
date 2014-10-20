@@ -35,3 +35,14 @@ fun get_substitutions1([], _) = []
       NONE      => get_substitutions1(xs', s)
       | SOME y  => y @ get_substitutions1(xs', s)
 
+fun get_substitutions2(substitutions, s) =
+  let 
+    fun aux([], acc) = acc
+      | aux(x::xs', acc) = 
+        case all_except_option(s, x) of
+          NONE      => aux(xs', acc)
+          | SOME y  => aux(xs', acc @ y)    
+  in
+    aux(substitutions, [])
+  end
+    
