@@ -21,18 +21,36 @@ val test3_2  = get_substitutions2([["Fred","Fredrick"],["Elizabeth","Betty"],["F
 val test4 = similar_names([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], {first="Fred", middle="W", last="Smith"}) =
 	    [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},
 	     {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
-(*
+
 val test5 = card_color((Clubs, Num 2)) = Black
 
 val test6 = card_value((Clubs, Num 2)) = 2
 
 val test7 = remove_card([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 
+val test7_1 = (remove_card([(Hearts, King)], (Hearts, Ace), IllegalMove); false) handle IllegalMove => true
+
+val test7_2 = remove_card([(Hearts, Ace), (Hearts, Ace), (Hearts, Ace)], (Hearts, Ace), IllegalMove) = [(Hearts, Ace), (Hearts, Ace)]
+
+val test7_3 = remove_card([(Hearts, King), (Hearts, Ace), (Hearts, Ace)], (Hearts, Ace), IllegalMove) = [(Hearts, King), (Hearts, Ace)]
+
 val test8 = all_same_color([(Hearts, Ace), (Hearts, Ace)]) = true
 
 val test9 = sum_cards([(Clubs, Num 2),(Clubs, Num 2)]) = 4
 
+val test9_1 = sum_cards([(Clubs, Ace),(Clubs, Queen), (Clubs, Jack)]) = 11 + 10 + 10
+
 val test10 = score([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
+
+val test10_1 = score([(Hearts, Num 2),(Clubs, Num 8)],10) = 0
+
+val test10_2 = score([(Hearts, Num 2),(Clubs, Num 3)],10) = 5
+
+val test10_3 = score([(Hearts, Num 2),(Hearts, Num 3)],10) = 2
+
+val test10_4 = score([(Hearts, Num 3),(Hearts, Num 3)],10) = 2
+
+val test10_5 = score([(Hearts, Num 4),(Hearts, Num 10)],10) = 6
 
 val test11 = officiate([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 
@@ -48,4 +66,3 @@ val test13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
               handle IllegalMove => true)
              
              
-*)

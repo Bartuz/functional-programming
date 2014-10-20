@@ -57,3 +57,76 @@ fun similar_names(substitutions : string list list, {first = f, middle = m, last
   end
 
 
+fun card_color card = 
+  case card of 
+    (Clubs, _)   => Black 
+  | (Spades, _)  => Black 
+  | _            => Red
+
+fun card_value card = 
+  case card of
+    (_, Ace)    => 11
+  | (_, Num n)  => n
+  | (_, _)      => 10
+
+fun remove_card(cs : card list, c : card, e : exn) =
+  let 
+    fun aux([], true) = []
+      | aux([], false) = raise e
+      | aux(x::xs', isRemoved) =
+        if isRemoved
+        then x::xs'
+        else if x = c then aux(xs', true) else x::aux(xs', false)
+  in 
+    aux(cs, false)
+  end
+
+fun all_same_color([])= true
+  | all_same_color(_::[]) = true
+  | all_same_color(head::(neck::tail)) =
+    card_color head = card_color neck andalso all_same_color(neck::tail)
+
+fun sum_cards(cs : card list) =
+  let fun aux([], acc) = acc
+    | aux(x::xs', acc) = aux(xs', acc + card_value(x))
+  in
+    aux(cs, 0)
+  end
+
+fun score(cs : card list, goal : int) =
+  let val cards_score = sum_cards cs
+  in 
+    let val preliminary_score = if cards_score > goal
+      then 3 * (cards_score - goal)
+      else (goal - cards_score)
+    in
+      if all_same_color(cs) 
+      then preliminary_score div 2
+      else preliminary_score
+    end
+  end
+
+fun officiate(cs : card list, moves : move list, goal : int) = 
+  let
+    fun play(_, held : card list, [])= score(held, goal)
+      | play([], held : card list, Draw::_)= score(held, goal)
+      | play(c::cs', held : card list, m::ms')=
+        case m of 
+          Discard card =>
+            let 
+              val cards = c::cs'
+              val held = remove_card(cards, card, IllegalMove)
+            in 
+              play(cards, held, ms')
+            end
+          | Draw => 
+            let 
+              val held = c::held
+              val sum_cards = sum_cards(held)
+            in 
+              if sum_cards > goal then score(held, goal) else play(cs', held, ms') 
+            end
+  in
+    play(cs, [], moves)
+  end
+
