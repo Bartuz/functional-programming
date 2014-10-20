@@ -48,37 +48,12 @@ fun get_substitutions2(substitutions, s) =
 
 type fullname = {first: string, middle: string, last : string}
 
-fun similar_names(substitutions , {first = f, middle = m, last = l}) =
-  let
-    fun aux([], acc) = acc
-      | aux(x::xs', acc) =
-        case get_substitutions2(x, f) of
-          []      => aux(xs', acc)
-          | y::ys' => 
-            let
-              val possibles = y::ys'
-              fun full_names([], acc) = acc
-                | full_names(x::xs', acc) =
-                  let val full_name = {first = x, last = l, middle = m}
-                  in full_names(xs', full_name :: acc)
-                  end
-            in 
-              full_names(possibles, acc @ full_names(possibles, []))
-            end
-  in
-    aux(substitutions,[{first = f, middle = m, last= l}])
-  end
-
 fun similar_names(substitutions : string list list, {first = f, middle = m, last = l} : fullname ) =
   let
     fun full_names([], acc) = acc
-      | full_names(x::xs', acc) =
-        let val full_name : fullname = {first = x, last = l, middle = m}
-        in full_names(xs', full_name :: acc )
-        end
+      | full_names(x::xs', acc) = full_names(xs', acc @ ({first = x, last = l, middle = m} :: []))
   in 
-    {first = f, middle = m, last = l} :: full_names(get_substitutions2(substitutions, f), [])
+    {first = f, last = l, middle = m} :: full_names(get_substitutions2(substitutions, f), [])
   end
 
 
-use "provided.sml";
