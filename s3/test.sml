@@ -19,8 +19,13 @@ val test3_2  = get_substitutions2([["Fred","Fredrick"],["Elizabeth","Betty"],["F
 
 
 val test4 = similar_names([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], {first="Fred", middle="W", last="Smith"}) =
+<<<<<<< HEAD
       [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},
        {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
+=======
+	    [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},
+	     {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
+>>>>>>> 06ae565fa5d3e9b67411047273c34482b9b70189
 
 val test5 = card_color((Clubs, Num 2)) = Black
 
@@ -58,8 +63,6 @@ val test12 = officiate([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
                        [Draw,Draw,Draw,Draw,Draw],
                        42)
              = 3
-
-officiate ([(Hearts, Num 5)], [Draw, Discard (Hearts, Num 5)], 20)    
 
 val test13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          [Draw,Discard(Hearts,Jack)],
