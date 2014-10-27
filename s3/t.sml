@@ -15,11 +15,27 @@ val test1_4 = only_capitals [] = []
 
 val test2 = longest_string1 ["A","bc","C"] = "bc"
 
+val test2_1 = longest_string1 ["A", "bc", "bx", "C"] = "bc"
+
+val test2_2 = longest_string1 [] = ""
+
+val test2_3 = longest_string1 ["A", "bc", "bxa", "C"] = "bxa"
+
 val test3 = longest_string2 ["A","bc","C"] = "bc"
+
+val test3_1 = longest_string2 ["A", "bc", "bx", "C"] = "bx"
 
 val test4a= longest_string3 ["A","bc","C"] = "bc"
 
+val test4a_1 = longest_string1 ["A", "bc", "bx", "C"] = "bc"
+
+val test4a_2 = longest_string1 [] = ""
+
+val test4a_3 = longest_string1 ["A", "bc", "bxa", "C"] = "bxa"
+
 val test4b= longest_string4 ["A","B","C"] = "C"
+
+val test4b_1 = longest_string2 ["A", "bc", "bx", "C"] = "bx"
 
 val test5 = longest_capitalized ["A","bc","C"] = "A";
 
