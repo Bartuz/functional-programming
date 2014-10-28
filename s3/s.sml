@@ -60,7 +60,66 @@ val longest_string3 = longest_string_helper (fn (x,y) => x > y)
 
 val longest_string4 = longest_string_helper (fn (x,y) => x >= y)
 
-fun longest_capitalized strs =
-	longest_string3 o only_capitals o strs
+val longest_capitalized = longest_string1 o only_capitals
 
 val rev_string = (String.implode o List.rev o String.explode)
+
+fun first_answer f l =
+	case l of 
+		[] 			 => raise NoAnswer
+		|	x::xs' => 
+			case f x of
+				NONE 		 => first_answer f xs'
+				| SOME v => v
+
+fun all_answers f l = 
+  let 
+		fun all_answers_helper (l', acc) = 
+	    case l' of 
+				[] 			=> SOME acc
+	      | x::xs => 
+	      	case f x of
+			     NONE 		=> NONE
+			   | SOME lst => all_answers_helper (xs, acc @ lst)
+  in
+		all_answers_helper (l, [])
+  end
+
+val count_wildcards = g (fn () => 1) (fn _ => 0)
+val count_wild_and_variable_lengths = g (fn () => 1) (fn s => String.size s)
+fun count_some_var (str, p) = 
+    g (fn v => 0) (fn s => if s = str then 1 else 0) p
+
+val check_pat =
+	let
+		fun var_names p = 
+	    case p of 
+				Variable v => [v]
+	      | ConstructorP (_, p') => var_names p'
+	      | TupleP ps => List.foldl (fn (p, acc) => (var_names p) @ acc) [] ps
+	      | _ => []
+		fun has_duplicate ss = 
+	    case ss of
+				[] 			 => false
+	      | s::ss' => 
+					(List.exists (fn s' => s = s') ss') orelse has_duplicate ss'
+	in
+		not o has_duplicate o var_names
+	end
+
+fun match (v, p) = 
+    case (v, p) of
+		(_, Wildcard) => SOME []
+    | (Unit, UnitP) => SOME []
+    | (Const c, ConstP c') => if c = c' then SOME [] else NONE
+    | (v, Variable n) => SOME [(n, v)]
+    | (Constructor (s1, v), ConstructorP (s2, p)) => 	
+				if s1 = s2 then match (v, p) else NONE
+
+    | (Tuple vs, TupleP ps) => if List.length vs = List.length ps
+			 then all_answers match (ListPair.zip (vs, ps))
+			 else NONE
+    | _ => NONE
+
+fun first_match va plst =
+  SOME (first_answer (fn x => match(va, x)) plst) handle NoAnswer => NONE
